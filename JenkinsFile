@@ -1,0 +1,21 @@
+pipeline {
+    agent any 
+
+    environment {
+        PATH = "/opt/maven/bin:$PATH"
+    }
+
+    stages {
+        stage('Git Clone') {
+            steps {
+                git branch: 'master', url: 'https://github.com/dankbhardwaj/sparkjava-war-example.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
